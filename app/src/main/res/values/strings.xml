@@ -1,23 +1,23 @@
 <resources>
     <string name="app_name">onBoardingCalculatorWithKotlin</string>
-    <string name="btn_text_number_zero">0</string>
-    <string name="btn_text_number_one">1</string>
-    <string name="btn_text_number_two">2</string>
-    <string name="btn_text_number_three">3</string>
-    <string name="btn_text_number_four">4</string>
-    <string name="btn_text_number_five">5</string>
-    <string name="btn_text_number_six">6</string>
-    <string name="btn_text_number_seven">7</string>
-    <string name="btn_text_number_eight">8</string>
-    <string name="btn_text_number_nine">9</string>
-    <string name="btn_text_point">.</string>
-    <string name="btn_text_equal">=</string>
-    <string name="btn_text_plus">+</string>
-    <string name="btn_text_sub">-</string>
-    <string name="btn_text_divide">/</string>
-    <string name="btn_text_multiply">x</string>
-    <string name="btn_text_clear">Clear</string>
-    <string name="btn_text_delete">Del</string>
+    <string name="text_button_number_zero">0</string>
+    <string name="text_button_number_one">1</string>
+    <string name="text_button_number_two">2</string>
+    <string name="text_button_number_three">3</string>
+    <string name="text_button_number_four">4</string>
+    <string name="text_button_number_five">5</string>
+    <string name="text_button_number_six">6</string>
+    <string name="text_button_number_seven">7</string>
+    <string name="text_button_number_eight">8</string>
+    <string name="text_button_number_nine">9</string>
+    <string name="text_button_decimal_point">.</string>
+    <string name="text_button_equal">=</string>
+    <string name="text_button_plus">+</string>
+    <string name="text_button_substraction">-</string>
+    <string name="text_button_divide">/</string>
+    <string name="text_button_multiply">x</string>
+    <string name="text_button_clear">Clear</string>
+    <string name="text_button_delete">Del</string>
     <string name="error_msj">Error: You can´t divide by zero</string>
     <string name="decimal_error_msj">Error: The operand already contains a decimal point</string>
     <string name="operator_error_msj">Error: You should add the first operand</string>

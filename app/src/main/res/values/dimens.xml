@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="visor_layout_margin_top">20dp</dimen>
-    <dimen name="btn_textsize">35sp</dimen>
+    <dimen name="margin_top_visor">20dp</dimen>
+    <dimen name="text_size_visor">35sp</dimen>
     <dimen name="btn_seven_margintop">45dp</dimen>
     <dimen name="btn_divide_marginend">4dp</dimen>
     <dimen name="btn_divide_marginright">4dp</dimen>
@@ -13,4 +13,6 @@
     <dimen name="border_stroke_width">2dp</dimen>
     <dimen name="border_corner_radius">5dp</dimen>
     <dimen name="visor_margin_top">12dp</dimen>
+    <dimen name="padding_start_visor">10dp</dimen>
+    <dimen name="padding_bottom_visor">2dp</dimen>
 </resources>
