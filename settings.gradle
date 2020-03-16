@@ -1,0 +1,2 @@
+rootProject.name='onBoardingCalculatorWithKotlin'
+include ':app'
