@@ -4,6 +4,7 @@ import com.globant.onboardingcalculatorwithkotlin.mvp.contracts.CalculatorContra
 import com.globant.onboardingcalculatorwithkotlin.mvp.model.CalculatorModel
 import com.globant.onboardingcalculatorwithkotlin.mvp.presenter.CalculatorPresenter
 import com.globant.onboardingcalculatorwithkotlin.mvp.view.CalculatorView
+import com.globant.onboardingcalculatorwithkotlin.utils.Constants.DECIMAL_POINT
 import com.globant.onboardingcalculatorwithkotlin.utils.Constants.EMPTY_CHAR
 import com.globant.onboardingcalculatorwithkotlin.utils.Constants.EMPTY_STRING
 import com.globant.onboardingcalculatorwithkotlin.utils.Constants.NUMBER_EIGHT
@@ -149,5 +150,92 @@ class CalculatorPresenterTest {
         assertEquals(EMPTY_STRING, model.result)
 
         verify(mockedView).refreshVisor(model.operator.toString())
+    }
+
+    @Test
+    fun `on point button pressed with empty operation`(){
+        presenter.onPointPressed()
+
+        assertEquals(NUMBER_ZERO + DECIMAL_POINT, model.first_operand)
+        assertEquals(EMPTY_CHAR, model.operator)
+        assertEquals(EMPTY_STRING, model.second_operand)
+        assertEquals(EMPTY_STRING, model.result)
+
+        verify(mockedView).refreshVisor(model.first_operand)
+    }
+
+    @Test
+    fun `on point button pressed with first operand`(){
+        model.first_operand = NUMBER_FIVE
+
+        presenter.onPointPressed()
+
+        assertEquals(NUMBER_FIVE + DECIMAL_POINT, model.first_operand)
+        assertEquals(EMPTY_CHAR, model.operator)
+        assertEquals(EMPTY_STRING, model.second_operand)
+        assertEquals(EMPTY_STRING, model.result)
+
+        verify(mockedView).refreshVisor(model.first_operand)
+    }
+
+    @Test
+    fun `on point button pressed with first operand with operator`(){
+        model.first_operand = NUMBER_FIVE
+        model.operator = OPERATOR_PLUS
+
+        presenter.onPointPressed()
+
+        assertEquals(NUMBER_FIVE, model.first_operand)
+        assertEquals(OPERATOR_PLUS, model.operator)
+        assertEquals(NUMBER_ZERO + DECIMAL_POINT, model.second_operand)
+        assertEquals(EMPTY_STRING, model.result)
+
+        verify(mockedView).refreshVisor(model.second_operand)
+    }
+
+    @Test
+    fun `on point button pressed with first operand with operator with second operand`(){
+        model.first_operand = NUMBER_FIVE
+        model.operator = OPERATOR_PLUS
+        model.second_operand = NUMBER_EIGHT
+
+        presenter.onPointPressed()
+
+        assertEquals(NUMBER_FIVE, model.first_operand)
+        assertEquals(OPERATOR_PLUS, model.operator)
+        assertEquals(NUMBER_EIGHT + DECIMAL_POINT, model.second_operand)
+        assertEquals(EMPTY_STRING, model.result)
+
+        verify(mockedView).refreshVisor(model.second_operand)
+    }
+
+    @Test
+    fun `on point button pressed with decimal number in first operand show error message`(){
+        model.first_operand = NUMBER_FIVE + DECIMAL_POINT + NUMBER_THREE
+
+        presenter.onPointPressed()
+
+        assertEquals(NUMBER_FIVE + DECIMAL_POINT + NUMBER_THREE, model.first_operand)
+        assertEquals(EMPTY_CHAR, model.operator)
+        assertEquals(EMPTY_STRING, model.second_operand)
+        assertEquals(EMPTY_STRING, model.result)
+
+        verify(mockedView).showDecimalError()
+    }
+
+    @Test
+    fun `on point button pressed with decimal number in second operand show error message`(){
+        model.first_operand = NUMBER_EIGHT
+        model.operator= OPERATOR_PLUS
+        model.second_operand = NUMBER_FIVE + DECIMAL_POINT + NUMBER_THREE
+
+        presenter.onPointPressed()
+
+        assertEquals(NUMBER_EIGHT, model.first_operand)
+        assertEquals(OPERATOR_PLUS, model.operator)
+        assertEquals(NUMBER_FIVE + DECIMAL_POINT + NUMBER_THREE, model.second_operand)
+        assertEquals(EMPTY_STRING, model.result)
+
+        verify(mockedView).showDecimalError()
     }
 }
