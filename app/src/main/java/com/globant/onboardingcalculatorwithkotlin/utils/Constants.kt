@@ -16,6 +16,6 @@ object Constants {
     const val OPERATOR_PLUS: Char = '+'
     const val OPERATOR_SUBSTRACTION: Char = '-'
     const val OPERATOR_DIVIDE: Char = '/'
-    const val OPERATOR_MULTIPLY: Char = '*'
+    const val OPERATOR_MULTIPLY: Char = 'x'
     const val EMPTY_CHAR = ' '
 }
