@@ -38,7 +38,6 @@ import kotlinx.android.synthetic.main.activity_main.button_main_number_zero
 import kotlinx.android.synthetic.main.activity_main.button_main_plus
 import kotlinx.android.synthetic.main.activity_main.button_main_substraction
 
-
 class MainActivity : AppCompatActivity() {
 
     private lateinit var presenter: CalculatorContracts.Presenter

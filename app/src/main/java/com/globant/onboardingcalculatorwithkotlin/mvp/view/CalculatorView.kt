@@ -1,6 +1,7 @@
 package com.globant.onboardingcalculatorwithkotlin.mvp.view
 
 import android.app.Activity
+import android.widget.TextView
 import android.widget.Toast
 import com.globant.onboardingcalculatorwithkotlin.R
 import com.globant.onboardingcalculatorwithkotlin.mvp.contracts.CalculatorContracts
@@ -9,12 +10,14 @@ import kotlinx.android.synthetic.main.activity_main.visor
 
 class CalculatorView(activity: Activity) : ActivityView(activity), CalculatorContracts.View {
 
+    private val visor: TextView = activity.visor
+
     override fun refreshVisor(value: String) {
-        activity?.visor?.text = value
+        visor.text = value
     }
 
     override fun clearVisor() {
-        activity?.visor?.text = NUMBER_ZERO
+        visor.text = NUMBER_ZERO
         showOperationCleaned()
     }
 

@@ -35,13 +35,13 @@ class CalculatorPresenter(
         if (model.operator == EMPTY_CHAR) {
             if (model.second_operand.isEmpty()) {
                 if (model.result.isEmpty()) {
-                    model.first_operand = model.first_operand + number
+                    model.first_operand = "${model.first_operand}$number"
                 } else {
                     view.showOperatorError()
                 }
             }
         } else {
-            model.second_operand = model.second_operand + number
+            model.second_operand = "${model.second_operand}$number"
         }
         updateVisor()
     }
@@ -58,17 +58,17 @@ class CalculatorPresenter(
     override fun onPointPressed() {
         if ((model.second_operand.isEmpty()) && (model.operator == EMPTY_CHAR)) {
             if (model.first_operand.isEmpty()) {
-                model.first_operand = NUMBER_ZERO + DECIMAL_POINT
+                model.first_operand = "$NUMBER_ZERO$DECIMAL_POINT"
             } else if (!model.first_operand.contains(DECIMAL_POINT)) {
-                model.first_operand = model.first_operand + DECIMAL_POINT
+                model.first_operand = "${model.first_operand}$DECIMAL_POINT"
             } else {
                 view.showDecimalError()
             }
         } else if (model.operator != EMPTY_CHAR) {
             if (model.second_operand.isEmpty()) {
-                model.second_operand = NUMBER_ZERO + DECIMAL_POINT
+                model.second_operand = "$NUMBER_ZERO$DECIMAL_POINT"
             } else if (!model.second_operand.contains(DECIMAL_POINT)) {
-                model.second_operand = model.second_operand + DECIMAL_POINT
+                model.second_operand = "${model.second_operand}$DECIMAL_POINT"
             } else {
                 view.showDecimalError()
             }
