@@ -18,10 +18,7 @@
     <string name="text_button_multiply">x</string>
     <string name="text_button_clear">Clear</string>
     <string name="text_button_delete">Del</string>
-    <string name="error_msj">Error: You can´t divide by zero</string>
-    <string name="decimal_error_msj">Error: The operand already contains a decimal point</string>
-    <string name="operator_error_msj">Error: You should add the first operand</string>
-    <string name="operator_error_after_equal_pressed">Error: You must add the first operand</string>
+    <string name="operator_error_msj">Error: You can´t set an operator now</string>
     <string name="operation_cleaned">Operation cleaned</string>
-    <string name="incomplete_operation_msj">Error: Incomplete operation</string>
+    <string name="decimal_error_msj">Error: The operand already contains a decimal point</string>
 </resources>
