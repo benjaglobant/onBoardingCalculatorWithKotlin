@@ -58,8 +58,10 @@ class CalculatorPresenter(
     override fun onOperatorPressed(operator: Char) {
         if (model.first_operand.isEmpty()) {
             view.showMessage(CalculatorError.OPERATOR_ERROR)
-        } else if ((model.operator == EMPTY_CHAR) || (model.second_operand.isEmpty())) {
+        } else if ((model.operator == EMPTY_CHAR) && (model.second_operand.isEmpty())) {
             model.operator = operator
+        }else if(model.operator != EMPTY_CHAR){
+            view.showMessage(CalculatorError.OPERATOR_ERROR)
         }
         updateVisor()
     }
