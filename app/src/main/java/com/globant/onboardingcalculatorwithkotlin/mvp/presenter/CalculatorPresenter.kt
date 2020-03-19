@@ -18,7 +18,7 @@ class CalculatorPresenter(
     private val view: CalculatorContracts.View
 ) : CalculatorContracts.Presenter {
 
-    private val decimalFormat: DecimalFormat = DecimalFormat(DECIMAL_FORMAT)
+    //private val decimalFormat: DecimalFormat = DecimalFormat(DECIMAL_FORMAT)
 
     override fun updateVisor() {
         if (model.first_operand.isEmpty()) {
@@ -60,7 +60,7 @@ class CalculatorPresenter(
             view.showMessage(CalculatorError.OPERATOR_ERROR)
         } else if ((model.operator == EMPTY_CHAR) && (model.second_operand.isEmpty())) {
             model.operator = operator
-        }else if(model.operator != EMPTY_CHAR){
+        } else if (model.operator != EMPTY_CHAR) {
             view.showMessage(CalculatorError.OPERATOR_ERROR)
         }
         updateVisor()
@@ -87,28 +87,27 @@ class CalculatorPresenter(
         updateVisor()
     }
 
-    private fun calculate(): String {
-        when (model.operator) {
-            OPERATOR_PLUS -> {
-                return decimalFormat.format(model.first_operand.toDouble() + model.second_operand.toDouble())
-            }
-            OPERATOR_SUBSTRACTION -> {
-                return decimalFormat.format(model.first_operand.toDouble() - model.second_operand.toDouble())
-            }
-            OPERATOR_MULTIPLY -> {
-                return decimalFormat.format(model.first_operand.toDouble() * model.second_operand.toDouble())
-            }
-            OPERATOR_DIVIDE -> {
-                if (!model.second_operand.equals(NUMBER_ZERO)) {
-                    return decimalFormat.format(model.first_operand.toDouble() / model.second_operand.toDouble())
-                } else {
-                    view.showMessage(CalculatorError.MATH_ERROR)
-                    onClearButtonPressed()
-                }
+    private fun validOperation(): Boolean {
+        if (!model.second_operand.equals(NUMBER_ZERO))
+            return true
+        return false
+    }
+
+    private fun calculate(): String = when {
+        model.operator === OPERATOR_PLUS -> model.first_operand.toDouble() + model.second_operand.toDouble()
+        model.operator === OPERATOR_SUBSTRACTION -> model.first_operand.toDouble() - model.second_operand.toDouble()
+        model.operator === OPERATOR_MULTIPLY -> model.first_operand.toDouble() * model.second_operand.toDouble()
+        model.operator === OPERATOR_DIVIDE -> {
+            if (validOperation()) {
+                model.first_operand.toDouble() / model.second_operand.toDouble()
+            } else {
+                view.showMessage(CalculatorError.MATH_ERROR)
+                onClearButtonPressed()
+                EMPTY_STRING
             }
         }
-        return EMPTY_STRING
-    }
+        else -> EMPTY_STRING
+    }.toString()
 
     override fun onEqualPressed() {
         if ((model.first_operand.isNotEmpty()) && (model.second_operand.isNotEmpty()) && (model.operator != EMPTY_CHAR)) {
@@ -116,7 +115,11 @@ class CalculatorPresenter(
             model.result = model.first_operand
             model.second_operand = EMPTY_STRING
             model.operator = EMPTY_CHAR
-            view.refreshVisor(model.result)
+            if(model.first_operand.isNotEmpty()){
+                view.refreshVisor(model.result)
+            }else{
+                view.clearVisor()
+            }
         } else {
             view.showMessage(CalculatorError.INCOMPLETE_OPERATION)
         }

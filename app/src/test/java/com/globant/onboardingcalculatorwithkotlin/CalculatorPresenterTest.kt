@@ -23,6 +23,7 @@ import com.nhaarman.mockitokotlin2.verify
 import org.junit.Test
 import org.junit.Assert.assertEquals
 
+const val WRONG_OPERATOR: Char = '?'
 
 class CalculatorPresenterTest {
     private val model: CalculatorContracts.Model = CalculatorModel()
@@ -294,10 +295,10 @@ class CalculatorPresenterTest {
 
         presenter.onEqualPressed()
 
-        assertEquals("$NUMBER_ONE$NUMBER_ZERO", model.first_operand)
+        assertEquals("$NUMBER_ONE$NUMBER_ZERO$DECIMAL_POINT$NUMBER_ZERO", model.first_operand)
         assertEquals(EMPTY_CHAR, model.operator)
         assertEquals(EMPTY_STRING, model.second_operand)
-        assertEquals("$NUMBER_ONE$NUMBER_ZERO", model.result)
+        assertEquals("$NUMBER_ONE$NUMBER_ZERO$DECIMAL_POINT$NUMBER_ZERO", model.result)
 
         verify(mockedView).refreshVisor(model.result)
     }
@@ -310,10 +311,10 @@ class CalculatorPresenterTest {
 
         presenter.onEqualPressed()
 
-        assertEquals("$NUMBER_TWO,$NUMBER_FIVE", model.first_operand)
+        assertEquals("$NUMBER_TWO.$NUMBER_FIVE", model.first_operand)
         assertEquals(EMPTY_CHAR, model.operator)
         assertEquals(EMPTY_STRING, model.second_operand)
-        assertEquals("$NUMBER_TWO,$NUMBER_FIVE", model.result)
+        assertEquals("$NUMBER_TWO.$NUMBER_FIVE", model.result)
 
         verify(mockedView).refreshVisor(model.result)
     }
@@ -326,10 +327,10 @@ class CalculatorPresenterTest {
 
         presenter.onEqualPressed()
 
-        assertEquals("$NUMBER_ONE$NUMBER_ZERO", model.first_operand)
+        assertEquals("$NUMBER_ONE$NUMBER_ZERO$DECIMAL_POINT$NUMBER_ZERO", model.first_operand)
         assertEquals(EMPTY_CHAR, model.operator)
         assertEquals(EMPTY_STRING, model.second_operand)
-        assertEquals("$NUMBER_ONE$NUMBER_ZERO", model.result)
+        assertEquals("$NUMBER_ONE$NUMBER_ZERO$DECIMAL_POINT$NUMBER_ZERO", model.result)
 
         verify(mockedView).refreshVisor(model.result)
     }
@@ -342,10 +343,10 @@ class CalculatorPresenterTest {
 
         presenter.onEqualPressed()
 
-        assertEquals(NUMBER_ONE, model.first_operand)
+        assertEquals("$NUMBER_ONE$DECIMAL_POINT$NUMBER_ZERO", model.first_operand)
         assertEquals(EMPTY_CHAR, model.operator)
         assertEquals(EMPTY_STRING, model.second_operand)
-        assertEquals(NUMBER_ONE, model.result)
+        assertEquals("$NUMBER_ONE$DECIMAL_POINT$NUMBER_ZERO", model.result)
 
         verify(mockedView).refreshVisor(model.result)
     }
@@ -364,5 +365,20 @@ class CalculatorPresenterTest {
         assertEquals(EMPTY_STRING, model.result)
 
         verify(mockedView).showMessage(CalculatorError.MATH_ERROR)
+    }
+
+    @Test
+    fun `on equals button pressed with wrong operator`(){
+        model.first_operand = NUMBER_EIGHT
+        model.operator = WRONG_OPERATOR
+        model.second_operand = NUMBER_THREE
+
+        presenter.onEqualPressed()
+
+        assertEquals(EMPTY_STRING, model.first_operand)
+        assertEquals(EMPTY_CHAR, model.operator)
+        assertEquals(EMPTY_STRING, model.second_operand)
+        assertEquals(EMPTY_STRING, model.result)
+
     }
 }
