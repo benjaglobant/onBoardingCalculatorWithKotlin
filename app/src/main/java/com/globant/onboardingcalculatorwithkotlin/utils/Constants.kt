@@ -13,6 +13,7 @@ object Constants {
     const val NUMBER_NINE: String = "9"
     const val DECIMAL_POINT: String = "."
     const val EMPTY_STRING: String = ""
+    const val DECIMAL_FORMAT: String = "#.##";
     const val OPERATOR_PLUS: Char = '+'
     const val OPERATOR_SUBSTRACTION: Char = '-'
     const val OPERATOR_DIVIDE: Char = '/'

@@ -21,4 +21,6 @@
     <string name="operator_error_msj">Error: You can´t set an operator now</string>
     <string name="operation_cleaned">Operation cleaned</string>
     <string name="decimal_error_msj">Error: The operand already contains a decimal point</string>
+    <string name="incomplete_operation_msj">Error: Incomplete operation</string>
+    <string name="math_error_msj">Error: You can´t divide by zero</string>
 </resources>
