@@ -111,7 +111,7 @@ class CalculatorPresenter(
     }
 
     override fun onEqualPressed() {
-        if (!((model.first_operand.isEmpty()) || (model.second_operand.isEmpty()) || (model.operator == EMPTY_CHAR))) {
+        if ((model.first_operand.isNotEmpty()) && (model.second_operand.isNotEmpty()) && (model.operator != EMPTY_CHAR)) {
             model.first_operand = calculate()
             model.result = model.first_operand
             model.second_operand = EMPTY_STRING

@@ -151,7 +151,7 @@ class CalculatorPresenterTest {
         presenter.onOperatorPressed(OPERATOR_SUBSTRACTION)
 
         assertEquals(NUMBER_FIVE, model.first_operand)
-        assertEquals(OPERATOR_SUBSTRACTION, model.operator)
+        assertEquals(OPERATOR_PLUS, model.operator)
         assertEquals(EMPTY_STRING, model.second_operand)
         assertEquals(EMPTY_STRING, model.result)
 
