@@ -2,7 +2,6 @@ package com.globant.onboardingcalculatorwithkotlin
 
 import com.globant.onboardingcalculatorwithkotlin.mvp.contracts.CalculatorContracts
 import com.globant.onboardingcalculatorwithkotlin.mvp.model.CalculatorModel
-import com.globant.onboardingcalculatorwithkotlin.mvp.presenter.CalculatorError
 import com.globant.onboardingcalculatorwithkotlin.mvp.presenter.CalculatorPresenter
 import com.globant.onboardingcalculatorwithkotlin.utils.Constants.DECIMAL_POINT
 import com.globant.onboardingcalculatorwithkotlin.utils.Constants.EMPTY_CHAR
@@ -25,7 +24,7 @@ import org.junit.Assert.assertEquals
 
 class CalculatorPresenterTest {
 
-    companion object{
+    companion object {
         const val WRONG_OPERATOR: Char = '?'
     }
 
@@ -118,7 +117,7 @@ class CalculatorPresenterTest {
         assertEquals(EMPTY_CHAR, model.operator)
         assertEquals(NUMBER_FIVE, model.result)
 
-        verify(mockedView).showMessage(CalculatorError.OPERATOR_ERROR)
+        verify(mockedView).showOperatorErrorMessage()
     }
 
     @Test
@@ -130,7 +129,7 @@ class CalculatorPresenterTest {
         assertEquals(EMPTY_CHAR, model.operator)
         assertEquals(EMPTY_STRING, model.result)
 
-        verify(mockedView).showMessage(CalculatorError.OPERATOR_ERROR)
+        verify(mockedView).showOperatorErrorMessage()
     }
 
     @Test
@@ -230,7 +229,7 @@ class CalculatorPresenterTest {
         assertEquals(EMPTY_STRING, model.second_operand)
         assertEquals(EMPTY_STRING, model.result)
 
-        verify(mockedView).showMessage(CalculatorError.DECIMAL_ERROR)
+        verify(mockedView).showDecimalErrorMessage()
     }
 
     @Test
@@ -246,7 +245,7 @@ class CalculatorPresenterTest {
         assertEquals("$NUMBER_FIVE$DECIMAL_POINT$NUMBER_THREE", model.second_operand)
         assertEquals(EMPTY_STRING, model.result)
 
-        verify(mockedView).showMessage(CalculatorError.DECIMAL_ERROR)
+        verify(mockedView).showDecimalErrorMessage()
     }
 
     @Test
@@ -258,7 +257,7 @@ class CalculatorPresenterTest {
         assertEquals(EMPTY_STRING, model.second_operand)
         assertEquals(EMPTY_STRING, model.result)
 
-        verify(mockedView).showMessage(CalculatorError.INCOMPLETE_OPERATION)
+        verify(mockedView).showIncompleteOperationErrorMessage()
     }
 
     @Test
@@ -272,7 +271,7 @@ class CalculatorPresenterTest {
         assertEquals(EMPTY_STRING, model.second_operand)
         assertEquals(EMPTY_STRING, model.result)
 
-        verify(mockedView).showMessage(CalculatorError.INCOMPLETE_OPERATION)
+        verify(mockedView).showIncompleteOperationErrorMessage()
     }
 
     @Test
@@ -287,7 +286,7 @@ class CalculatorPresenterTest {
         assertEquals(EMPTY_STRING, model.second_operand)
         assertEquals(EMPTY_STRING, model.result)
 
-        verify(mockedView).showMessage(CalculatorError.INCOMPLETE_OPERATION)
+        verify(mockedView).showIncompleteOperationErrorMessage()
     }
 
     @Test
@@ -367,11 +366,11 @@ class CalculatorPresenterTest {
         assertEquals(EMPTY_STRING, model.second_operand)
         assertEquals(EMPTY_STRING, model.result)
 
-        verify(mockedView).showMessage(CalculatorError.MATH_ERROR)
+        verify(mockedView).showInvalidDivision()
     }
 
     @Test
-    fun `on equals button pressed with wrong operator`(){
+    fun `on equals button pressed with wrong operator`() {
         model.first_operand = NUMBER_EIGHT
         model.operator = WRONG_OPERATOR
         model.second_operand = NUMBER_THREE
@@ -382,6 +381,5 @@ class CalculatorPresenterTest {
         assertEquals(EMPTY_CHAR, model.operator)
         assertEquals(EMPTY_STRING, model.second_operand)
         assertEquals(EMPTY_STRING, model.result)
-
     }
 }

@@ -1,19 +1,22 @@
 package com.globant.onboardingcalculatorwithkotlin.mvp.contracts
 
-import com.globant.onboardingcalculatorwithkotlin.mvp.presenter.CalculatorError
-
 interface CalculatorContracts {
     interface Model {
         var first_operand: String
         var second_operand: String
         var operator: Char
         var result: String
+        fun calculate(): String
+        fun clear()
     }
 
     interface View {
         fun refreshVisor(value: String)
         fun clearVisor()
-        fun showMessage(message: CalculatorError)
+        fun showOperatorErrorMessage()
+        fun showDecimalErrorMessage()
+        fun showIncompleteOperationErrorMessage()
+        fun showInvalidDivision()
     }
 
     interface Presenter {

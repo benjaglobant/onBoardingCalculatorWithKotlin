@@ -1,11 +1,10 @@
 package com.globant.onboardingcalculatorwithkotlin.mvp.view
 
 import android.app.Activity
-import android.provider.Settings.Global.getString
 import android.widget.TextView
 import android.widget.Toast
+import com.globant.onboardingcalculatorwithkotlin.R
 import com.globant.onboardingcalculatorwithkotlin.mvp.contracts.CalculatorContracts
-import com.globant.onboardingcalculatorwithkotlin.mvp.presenter.CalculatorError
 import com.globant.onboardingcalculatorwithkotlin.utils.Constants.NUMBER_ZERO
 import kotlinx.android.synthetic.main.activity_main.visor
 
@@ -19,10 +18,25 @@ class CalculatorView(activity: Activity) : ActivityView(activity), CalculatorCon
 
     override fun clearVisor() {
         visor.text = NUMBER_ZERO
-        showMessage(CalculatorError.OPERATION_CLEANED)
     }
 
-    override fun showMessage(error: CalculatorError) {
-        Toast.makeText(activity, error.getErrorMessage(), Toast.LENGTH_LONG).show()
+    private fun showMessage(message: Int) {
+        Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
+    }
+
+    override fun showIncompleteOperationErrorMessage() {
+        showMessage(R.string.incomplete_operation_msj)
+    }
+
+    override fun showDecimalErrorMessage() {
+        showMessage(R.string.decimal_error_msj)
+    }
+
+    override fun showInvalidDivision() {
+        showMessage(R.string.math_error_msj)
+    }
+
+    override fun showOperatorErrorMessage() {
+        showMessage(R.string.operator_error_msj)
     }
 }
