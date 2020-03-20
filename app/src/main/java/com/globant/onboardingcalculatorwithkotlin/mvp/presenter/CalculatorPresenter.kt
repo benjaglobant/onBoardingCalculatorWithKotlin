@@ -118,6 +118,19 @@ class CalculatorPresenter(
             view.showMessage(CalculatorError.INCOMPLETE_OPERATION)
         }
     }
+
+    override fun onDeletePressed() {
+        if ((model.second_operand.isEmpty()) && (model.operator == EMPTY_CHAR) && (model.first_operand.isNotEmpty())) {
+            model.first_operand = model.first_operand.substring(0, model.first_operand.length - 1)
+        } else if (model.first_operand.isEmpty()) {
+            view.showMessage(CalculatorError.INCOMPLETE_OPERATION)
+        } else if ((model.second_operand.isEmpty()) && (model.operator != EMPTY_CHAR)) {
+            model.operator = EMPTY_CHAR
+        } else if ((model.second_operand.isNotEmpty()) && (model.operator != EMPTY_CHAR)) {
+            model.second_operand = model.second_operand.substring(0, model.second_operand.length - 1)
+        }
+        updateVisor()
+    }
 }
 
 enum class CalculatorError() {

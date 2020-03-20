@@ -23,5 +23,6 @@ interface CalculatorContracts {
         fun onOperatorPressed(operator: Char)
         fun onPointPressed()
         fun onEqualPressed()
+        fun onDeletePressed()
     }
 }

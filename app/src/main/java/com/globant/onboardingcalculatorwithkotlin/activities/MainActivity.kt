@@ -23,6 +23,7 @@ import com.globant.onboardingcalculatorwithkotlin.utils.Constants.OPERATOR_PLUS
 import com.globant.onboardingcalculatorwithkotlin.utils.Constants.OPERATOR_SUBSTRACTION
 import kotlinx.android.synthetic.main.activity_main.button_main_clear
 import kotlinx.android.synthetic.main.activity_main.button_main_decimal_point
+import kotlinx.android.synthetic.main.activity_main.button_main_delete
 import kotlinx.android.synthetic.main.activity_main.button_main_divide
 import kotlinx.android.synthetic.main.activity_main.button_main_equal
 import kotlinx.android.synthetic.main.activity_main.button_main_multiply
@@ -101,6 +102,9 @@ class MainActivity : AppCompatActivity() {
         }
         button_main_equal.setOnClickListener {
             presenter.onEqualPressed()
+        }
+        button_main_delete.setOnClickListener {
+            presenter.onDeletePressed()
         }
     }
 }

@@ -382,6 +382,61 @@ class CalculatorPresenterTest {
         assertEquals(EMPTY_CHAR, model.operator)
         assertEquals(EMPTY_STRING, model.second_operand)
         assertEquals(EMPTY_STRING, model.result)
+    }
 
+    @Test
+    fun `on delete button pressed with empty operation show error message`(){
+        presenter.onDeletePressed()
+
+        assertEquals(EMPTY_STRING, model.first_operand)
+        assertEquals(EMPTY_CHAR, model.operator)
+        assertEquals(EMPTY_STRING, model.second_operand)
+        assertEquals(EMPTY_STRING, model.result)
+
+        verify(mockedView).showMessage(CalculatorError.INCOMPLETE_OPERATION)
+    }
+
+    @Test
+    fun `on delete button pressed with first operand`(){
+        model.first_operand = "$NUMBER_FIVE$NUMBER_EIGHT$NUMBER_ZERO"
+
+        presenter.onDeletePressed()
+
+        assertEquals("$NUMBER_FIVE$NUMBER_EIGHT", model.first_operand)
+        assertEquals(EMPTY_CHAR, model.operator)
+        assertEquals(EMPTY_STRING, model.second_operand)
+        assertEquals(EMPTY_STRING, model.result)
+
+        verify(mockedView).refreshVisor(model.first_operand)
+    }
+
+    @Test
+    fun `on delete button pressed with first operand with operator`(){
+        model.first_operand = "$NUMBER_FIVE$NUMBER_EIGHT$NUMBER_ZERO"
+        model.operator = OPERATOR_PLUS
+
+        presenter.onDeletePressed()
+
+        assertEquals("$NUMBER_FIVE$NUMBER_EIGHT$NUMBER_ZERO", model.first_operand)
+        assertEquals(EMPTY_CHAR, model.operator)
+        assertEquals(EMPTY_STRING, model.second_operand)
+        assertEquals(EMPTY_STRING, model.result)
+
+        verify(mockedView).refreshVisor(model.first_operand)
+    }
+
+    @Test
+    fun `on delete button pressed with first operand with operator with decimal in second operand`(){
+        model.first_operand = NUMBER_FIVE
+        model.operator = OPERATOR_PLUS
+        model.second_operand = "$NUMBER_TWO$DECIMAL_POINT$NUMBER_FIVE$NUMBER_EIGHT"
+        presenter.onDeletePressed()
+
+        assertEquals(NUMBER_FIVE, model.first_operand)
+        assertEquals(OPERATOR_PLUS, model.operator)
+        assertEquals("$NUMBER_TWO$DECIMAL_POINT$NUMBER_FIVE", model.second_operand)
+        assertEquals(EMPTY_STRING, model.result)
+
+        verify(mockedView).refreshVisor(model.second_operand)
     }
 }
