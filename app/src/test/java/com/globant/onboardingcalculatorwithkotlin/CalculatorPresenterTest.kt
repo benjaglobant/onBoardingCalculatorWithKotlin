@@ -23,9 +23,12 @@ import com.nhaarman.mockitokotlin2.verify
 import org.junit.Test
 import org.junit.Assert.assertEquals
 
-const val WRONG_OPERATOR: Char = '?'
-
 class CalculatorPresenterTest {
+
+    companion object{
+        const val WRONG_OPERATOR: Char = '?'
+    }
+
     private val model: CalculatorContracts.Model = CalculatorModel()
     private val mockedView: CalculatorContracts.View = mock()
     private val presenter: CalculatorContracts.Presenter = CalculatorPresenter(model, mockedView)
