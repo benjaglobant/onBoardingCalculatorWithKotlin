@@ -1,6 +1,7 @@
 package com.globant.onboardingcalculatorwithkotlin.mvp.view
 
 import android.app.Activity
+import android.provider.Settings.Global.getString
 import android.widget.TextView
 import android.widget.Toast
 import com.globant.onboardingcalculatorwithkotlin.mvp.contracts.CalculatorContracts
@@ -22,6 +23,6 @@ class CalculatorView(activity: Activity) : ActivityView(activity), CalculatorCon
     }
 
     override fun showMessage(error: CalculatorError) {
-        Toast.makeText(activity, error.message, Toast.LENGTH_LONG).show()
+        Toast.makeText(activity, error.getErrorMessage(), Toast.LENGTH_LONG).show()
     }
 }

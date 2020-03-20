@@ -2,7 +2,6 @@ package com.globant.onboardingcalculatorwithkotlin.mvp.presenter
 
 import com.globant.onboardingcalculatorwithkotlin.R
 import com.globant.onboardingcalculatorwithkotlin.mvp.contracts.CalculatorContracts
-import com.globant.onboardingcalculatorwithkotlin.utils.Constants.DECIMAL_FORMAT
 import com.globant.onboardingcalculatorwithkotlin.utils.Constants.DECIMAL_POINT
 import com.globant.onboardingcalculatorwithkotlin.utils.Constants.EMPTY_CHAR
 import com.globant.onboardingcalculatorwithkotlin.utils.Constants.EMPTY_STRING
@@ -11,14 +10,11 @@ import com.globant.onboardingcalculatorwithkotlin.utils.Constants.OPERATOR_DIVID
 import com.globant.onboardingcalculatorwithkotlin.utils.Constants.OPERATOR_MULTIPLY
 import com.globant.onboardingcalculatorwithkotlin.utils.Constants.OPERATOR_PLUS
 import com.globant.onboardingcalculatorwithkotlin.utils.Constants.OPERATOR_SUBSTRACTION
-import java.text.DecimalFormat
 
 class CalculatorPresenter(
     private val model: CalculatorContracts.Model,
     private val view: CalculatorContracts.View
 ) : CalculatorContracts.Presenter {
-
-    //private val decimalFormat: DecimalFormat = DecimalFormat(DECIMAL_FORMAT)
 
     override fun updateVisor() {
         if (model.first_operand.isEmpty()) {
@@ -88,9 +84,7 @@ class CalculatorPresenter(
     }
 
     private fun validOperation(): Boolean {
-        if (!model.second_operand.equals(NUMBER_ZERO))
-            return true
-        return false
+        return !model.second_operand.equals(NUMBER_ZERO)
     }
 
     private fun calculate(): String = when {
@@ -115,9 +109,9 @@ class CalculatorPresenter(
             model.result = model.first_operand
             model.second_operand = EMPTY_STRING
             model.operator = EMPTY_CHAR
-            if(model.first_operand.isNotEmpty()){
+            if (model.first_operand.isNotEmpty()) {
                 view.refreshVisor(model.result)
-            }else{
+            } else {
                 view.clearVisor()
             }
         } else {
@@ -126,10 +120,32 @@ class CalculatorPresenter(
     }
 }
 
-enum class CalculatorError(val message: Int) {
-    DECIMAL_ERROR(R.string.decimal_error_msj),
-    OPERATOR_ERROR(R.string.operator_error_msj),
-    MATH_ERROR(R.string.math_error_msj),
-    INCOMPLETE_OPERATION(R.string.incomplete_operation_msj),
-    OPERATION_CLEANED(R.string.operation_cleaned)
+enum class CalculatorError() {
+    DECIMAL_ERROR {
+        override fun getErrorMessage(): Int {
+            return R.string.decimal_error_msj
+        }
+    },
+    OPERATOR_ERROR {
+        override fun getErrorMessage(): Int {
+            return R.string.operator_error_msj
+        }
+    },
+    MATH_ERROR {
+        override fun getErrorMessage(): Int {
+            return R.string.math_error_msj
+        }
+    },
+    INCOMPLETE_OPERATION {
+        override fun getErrorMessage(): Int {
+            return R.string.incomplete_operation_msj
+        }
+    },
+    OPERATION_CLEANED {
+        override fun getErrorMessage(): Int {
+            return R.string.operation_cleaned
+        }
+    };
+
+    abstract fun getErrorMessage(): Int
 }
