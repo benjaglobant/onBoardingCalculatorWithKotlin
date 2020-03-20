@@ -24,6 +24,7 @@ import com.globant.onboardingcalculatorwithkotlin.utils.Constants.OPERATOR_SUBST
 import kotlinx.android.synthetic.main.activity_main.button_main_clear
 import kotlinx.android.synthetic.main.activity_main.button_main_decimal_point
 import kotlinx.android.synthetic.main.activity_main.button_main_divide
+import kotlinx.android.synthetic.main.activity_main.button_main_equal
 import kotlinx.android.synthetic.main.activity_main.button_main_multiply
 import kotlinx.android.synthetic.main.activity_main.button_main_number_eight
 import kotlinx.android.synthetic.main.activity_main.button_main_number_five
@@ -97,6 +98,9 @@ class MainActivity : AppCompatActivity() {
         }
         button_main_decimal_point.setOnClickListener {
             presenter.onPointPressed()
+        }
+        button_main_equal.setOnClickListener {
+            presenter.onEqualPressed()
         }
     }
 }
