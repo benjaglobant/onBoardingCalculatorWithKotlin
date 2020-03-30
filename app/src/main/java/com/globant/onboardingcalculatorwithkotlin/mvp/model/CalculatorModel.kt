@@ -46,9 +46,9 @@ class CalculatorModel : CalculatorContracts.Model {
         return result
     }
 
-    override fun isFullOperation(): Boolean {
-        return ((first_operand.isNotEmpty()) && (second_operand.isNotEmpty()) && (operator != EMPTY_CHAR))
-    }
+    override fun isFullOperation(): Boolean =
+        ((first_operand.isNotEmpty()) && (second_operand.isNotEmpty()) && (operator != EMPTY_CHAR))
+
 
     override fun currentValue(): String {
         if (first_operand.isEmpty()) {
@@ -81,11 +81,11 @@ class CalculatorModel : CalculatorContracts.Model {
     override fun saveOperator(operator: Char): Boolean {
         if (first_operand.isEmpty() || this.operator != EMPTY_CHAR)
             return false
-        else if (second_operand.isEmpty())
+        else if (second_operand.isEmpty()) {
             this.operator = operator
-        else
+            return true
+        } else
             return false
-        return true
     }
 
     override fun appendDecimalPoint(): Boolean {

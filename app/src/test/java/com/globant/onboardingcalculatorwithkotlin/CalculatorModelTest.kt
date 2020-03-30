@@ -19,10 +19,6 @@ import org.junit.Test
 
 class CalculatorModelTest {
 
-    companion object {
-        const val WRONG_OPERATOR: Char = '?'
-    }
-
     private val model: CalculatorContracts.Model = CalculatorModel()
 
     @Test
@@ -60,15 +56,6 @@ class CalculatorModelTest {
         model.appendNumber(NUMBER_TWO)
 
         assert("$NUMBER_FOUR$DECIMAL_POINT$NUMBER_ZERO" == model.calculate())
-    }
-
-    @Test
-    fun `testing to set a wrong operator returns empty string on calculate method`() {
-        model.appendNumber(NUMBER_EIGHT)
-        model.saveOperator(WRONG_OPERATOR)
-        model.appendNumber(NUMBER_TWO)
-
-        assert(EMPTY_STRING == model.calculate())
     }
 
     @Test
