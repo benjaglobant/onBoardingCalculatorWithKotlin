@@ -24,10 +24,11 @@ class CalculatorModel : CalculatorContracts.Model {
     }
 
     private fun validDivision(): String {
-        if (second_operand.equals(NUMBER_ZERO))
+        if (second_operand.equals(NUMBER_ZERO)){
             return EMPTY_STRING
-        else
+        }else{
             return (first_operand.toDouble() / second_operand.toDouble()).toString()
+        }
     }
 
     override fun calculate(): String {
@@ -79,13 +80,14 @@ class CalculatorModel : CalculatorContracts.Model {
     }
 
     override fun saveOperator(operator: Char): Boolean {
-        if (first_operand.isEmpty() || this.operator != EMPTY_CHAR)
+        if (first_operand.isEmpty() || this.operator != EMPTY_CHAR){
             return false
-        else if (second_operand.isEmpty()) {
+        } else if (second_operand.isEmpty()) {
             this.operator = operator
             return true
-        } else
+        } else{
             return false
+        }
     }
 
     override fun appendDecimalPoint(): Boolean {

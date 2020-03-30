@@ -17,8 +17,9 @@ class CalculatorPresenter(
     }
 
     override fun onNumberPressed(number: String) {
-        if (!model.appendNumber(number))
+        if (!model.appendNumber(number)) {
             view.showOperatorErrorMessage()
+        }
         updateVisor()
     }
 
@@ -30,18 +31,19 @@ class CalculatorPresenter(
     }
 
     override fun onPointPressed() {
-        if (!model.appendDecimalPoint())
+        if (!model.appendDecimalPoint()) {
             view.showDecimalErrorMessage()
-        else
+        } else {
             updateVisor()
+        }
     }
 
     override fun onEqualPressed() {
         if (model.isFullOperation()) {
             val result = model.calculate()
-            if (result.isNotEmpty())
+            if (result.isNotEmpty()) {
                 view.refreshVisor(result)
-            else {
+            } else {
                 model.clear()
                 view.refreshVisor(model.currentValue())
                 view.showInvalidDivision()
@@ -52,9 +54,10 @@ class CalculatorPresenter(
     }
 
     override fun onDeletePressed() {
-        if (!model.deleteDigit())
+        if (!model.deleteDigit()) {
             view.showIncompleteOperationErrorMessage()
-        else
+        } else {
             updateVisor()
+        }
     }
 }
